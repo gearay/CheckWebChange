@@ -52,7 +52,7 @@ def login(username, password):
     #不使用代理
     result = res.post(loginurl, data=data)
     #打印出登录结果， 以及页面长度，基于长度判断的话比较好筛选结果
-    print(password + " -> " + result.text.strip('\n').strip('\r') + " -> " + str(len(result.text)))
+    print(result.text.strip('\n').strip('\r') + " -> " + str(len(result.text)))
 
 
 #获取密码字典的文件对象
