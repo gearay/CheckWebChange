@@ -31,7 +31,6 @@ def gettoken(page):
     token = soup.find_all("input")
     #返回的数组有三个元素，而由表单结构可知，第三个输入是我们要获取的token，所以取数组下标为2的元素
     #print(token)
-    print(str(soup))
     token = str(token[2])
     #找右边的地一个引号，因为从表单结构可知，token是被双引号包裹的，又知道md5值长度是32，再根据数组”包左不包右“的性质，容易得出token值的范围
     r = token.rfind('"')
@@ -45,6 +44,7 @@ def login(username, password,loginurl,formurl):
     res = requests.session()
     #取得页面
     page = res.get(formurl)
+    print(page.text)
     #获取token
     token = gettoken(page.text)
     #构造post的数据
