@@ -1,61 +1,104 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# @Date    : 2016-12-29 11:54:40
-# @Author  : Yan Chen (cheny.gary@gmail.com)
+import requests #做web请求的库
+from bs4 import BeautifulSoup #处理html的库
+# import argparse
+#import threading #多线程库
+import sys
 
-from webopener import getHtml
-import re
-import urllib.parse
-import json
-from functools import reduce
+# #表单的url
+# formurl = 'https://billing.virmach.com/clientarea.php?action=services'
+# #处理登录请求的url
+# loginurl = 'https://billing.virmach.com/dologin.php'
+#请求包头
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36',
+    'scheme': 'https',
+    'Connection': 'keep-alive',
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+}
+#代理，可用可不用，方便burpsuite抓包分析的
+#proxies = {
+#    'http': 'http://127.0.0.1:8080'
+#}
+
+#获取token的函数
+def gettoken(page):
+    #将传进来的html页面传给BeautifulSoup
+    soup = BeautifulSoup(page, 'html.parser')
+    # print(soup.prettify())
+    #从页面中找出所有的表单输入
+    token = soup.find_all("input")
+    #返回的数组有三个元素，而由表单结构可知，第三个输入是我们要获取的token，所以取数组下标为2的元素
+    #print(token)
+    token = str(token[2])
+    #找右边的地一个引号，因为从表单结构可知，token是被双引号包裹的，又知道md5值长度是32，再根据数组”包左不包右“的性质，容易得出token值的范围
+    r = token.rfind('"')
+    l = r - 32
+    token = token[l:r]
+    return token
+
+#尝试登录的函数
+def login(username, password,loginurl,formurl):
+    #token机制是基于session的，session是基于cookies的，所以一定要开启requests的session功能
+    res = requests.session()
+    #取得页面
+    page = res.get(formurl)
+    #获取token
+    token = gettoken(page.text)
+    #构造post的数据
+    data = {'username': username, 'password': password, 'token': token}
+    #使用同一个requests对象，在同一个session里进行登录
+    #使用代理
+    #result = res.post(loginurl, data=data, proxies=proxies)
+    #不使用代理
+    result = res.post(loginurl, data=data)
+    # return(result.text)
+    #打印出登录结果， 以及页面长度，基于长度判断的话比较好筛选结果
+    return(result.text)
+
+def chkvps(usr,pas):
+    # #表单的url
+    formurl = 'https://billing.virmach.com/clientarea.php?action=services'
+    # #处理登录请求的url
+    loginurl = 'https://billing.virmach.com/dologin.php'
+    clstapg = login(usr,pas,loginurl,formurl)
+    # print(clstapg)
+    soup = BeautifulSoup(clstapg, 'html.parser')
+    sta = soup.find_all('span')
+    sta = str(sta[-3].string)
+	  return sta
 
 
-def fdseller(keywords):
-    sellers = []
-    # print(keywords[0])
-    for item in keywords:
 
-        seller = set()
-        for page in range(0, 750, 15):
-            postdata = {
-                'q': item,
-                'js': '1',
-                'ie': 'utf8',
-                'uniq': 'shop',
-                'sort': 'credit-desc',
-                's': page
+#获取密码字典的文件对象
+# def getdict(file):
+#     dict = []
+#     try:
+#         f = open(file, "r")
+#         for p in f.readlines():
+#             dict.append(p)
 
-            }
-            # print(seller)
-            postdata = urllib.parse.urlencode(postdata)
-            taobao = "https://s.taobao.com/search?" + postdata
-            # print(taobao)
-            try:
-                content1 = getHtml(taobao)
-                content1 = content1.decode('utf-8', 'ignore')
-                content1 = re.findall(
-                    r'g_page_config = (.*?);\n', content1, re.S)
-                product = json.loads(content1[0])
-                productfiles = product['mods']['itemlist']['data']['sellers']
-                for productfile in productfiles:
-                    seller.add(productfile['user_id'])
+#         return dict
+#     except:
+#         print('文件异常')
 
-            except Exception as e:
-                if hasattr(e, 'code'):
-                    print('页面不存在或时间太长.')
-                    print('Error code:', e.code)
-                raise e
-            finally:
-                next
-        # print(seller)
-        sellers.append(seller)
-    # return(sellers)
-    return reduce(lambda x, y: x & y, sellers)
+#获取命令行参数
+#爆破的用户名
+#username = sys.argv[1]
+#密码字典的文件名
+#passfile = sys.argv[2]
 
-if __name__ == "__main__":
-    keys = []
-    for keyword in iter(input, ''):
-        keys.append(keyword)
-    fdsellers = fdseller(keys)
-    for fd in fdsellers:
-        print('https://store.taobao.com/shop/view_shop.htm?user_number_id=%s' % fd)
+# t=args.thread
+# tpool=[]
+#file = getdict(passfile)
+#遍历字典
+# for p in file:
+#     #将取出的结果转换成字符串
+#     p = str(p)
+#     #去掉特殊符号
+#     p = p.strip().strip('\n').strip('\r')
+#     #多线程破解
+#     t = threading.Thread(target=login, args=(username, p))
+#     # tpool.append(tt)
+#     t.start()
+#     # 用了join会稍微慢点，但是安全，和不用多线程速度差不多，如此join多线程的意义不大。
+#     t.join()
