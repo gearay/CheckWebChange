@@ -12,11 +12,16 @@ import datetime
 # loginurl = 'https://billing.virmach.com/dologin.php'
 #请求包头
 header = {
+		'authority': 'billing.virmach.com',
+		'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+		'accept-encoding': 'gzip, deflate, br',
+		'cache-control':'max-age=0',
+		'upgrade-insecure-requests': '1',
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36',
     'scheme': 'https',
     'Connection': 'keep-alive',
-    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
 }
+
 #代理，可用可不用，方便burpsuite抓包分析的
 #proxies = {
 #    'http': 'http://127.0.0.1:8080'
