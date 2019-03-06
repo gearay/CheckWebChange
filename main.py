@@ -1,8 +1,10 @@
 import requests #做web请求的库
 from bs4 import BeautifulSoup #处理html的库
+import itchat
+import datetime
 # import argparse
 #import threading #多线程库
-import sys
+# import sys
 
 # #表单的url
 # formurl = 'https://billing.virmach.com/clientarea.php?action=services'
@@ -65,9 +67,36 @@ def chkvps(usr,pas):
     soup = BeautifulSoup(clstapg, 'html.parser')
     sta = soup.find_all('span')
     sta = str(sta[-3].string)
-	  return sta
+    return(sta)
 
+def getlogin(file):
+	try :
+		dict =[]
+		f = open(file)
+		for w in f.readlines():
+			dict.append(w)
+		return(dict)
+	except:
+		print('Can\'t find the file')
 
+if __name__ == '__main__':
+
+	logininfo = getlogin('loginfile')
+	uname = logininfo[0]
+	pword = logininfo[1]
+	scheduled_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+	flag=0
+	while True:
+		now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+		if now == scheduled_time and flag==0:
+			itchat.auto_login(hotReload=True, enableCmdQR=2)
+			sersta = chkvps(uname,pword)
+			itchat.send_msg(str(now)+u'Virmach server now is on '+sersta,)
+			flag=1
+		else:
+			if flag==1:
+				scheduled_time=(datetime.datetime.now()+datetime.timedelta(minutes=1)).strftime("%Y-%m-%d %H:%M")
+				flag=0
 
 #获取密码字典的文件对象
 # def getdict(file):
