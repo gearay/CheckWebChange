@@ -60,7 +60,8 @@ def login(username, password,loginurl,formurl):
 
 def chkvps(usr,pas):
     # #表单的url
-    formurl = 'https://billing.virmach.com/clientarea.php?action=services'
+    # formurl = 'https://billing.virmach.com/clientarea.php?action=services'
+    formurl = "https://virmach.com"
     # #处理登录请求的url
     loginurl = 'https://billing.virmach.com/dologin.php'
     clstapg = login(usr,pas,loginurl,formurl)
