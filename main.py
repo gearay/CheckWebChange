@@ -11,7 +11,7 @@ import datetime
 # #处理登录请求的url
 # loginurl = 'https://billing.virmach.com/dologin.php'
 #请求包头
-headers = {
+header = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36',
     'scheme': 'https',
     'Connection': 'keep-alive',
@@ -42,9 +42,8 @@ def gettoken(page):
 def login(username, password,loginurl,formurl):
     #token机制是基于session的，session是基于cookies的，所以一定要开启requests的session功能
     res = requests.session()
-    res.headers.update(headers)
     #取得页面
-    page = res.get(formurl)
+    page = res.get(formurl, headers=header)
     #获取token
     token = gettoken(page.text)
     #构造post的数据
