@@ -42,6 +42,7 @@ def gettoken(page):
 def login(username, password,loginurl,formurl):
     #token机制是基于session的，session是基于cookies的，所以一定要开启requests的session功能
     res = requests.session()
+    res.headers.update(headers)
     #取得页面
     page = res.get(formurl)
     #获取token
