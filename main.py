@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import requests #做web请求的库
 from bs4 import BeautifulSoup #处理html的库
 import itchat
@@ -97,11 +100,11 @@ if __name__ == '__main__':
 		if now == scheduled_time and flag==0:
 			itchat.auto_login(hotReload=True, enableCmdQR=2)
 			sersta = chkvps(uname,pword)
-			itchat.send_msg(str(now)+u' Virmach server now is on '+sersta,)
+			itchat.send_msg('%s Virmach server now is on %s'%(now, sersta),)
 			flag=1
 		else:
 			if flag==1:
-				scheduled_time=(datetime.datetime.now()+datetime.timedelta(days=1)).strftime("%Y-%m-%d %H:%M")
+				scheduled_time=(datetime.datetime.now()+datetime.timedelta(hours=3)).strftime("%Y-%m-%d %H:%M")
 				flag=0
 
 #获取密码字典的文件对象
