@@ -100,7 +100,7 @@ if __name__ == '__main__':
 			chrome_opt.add_argument('--disable-gpu')
 			chrome_opt.add_argument('--no-sandbox')
 			chrome_opt.add_argument('--disable-dev-shm-usage')
-			chrome_opt.add_argument(f'user-agent={Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/72.0.3626.119 Chrome/72.0.3626.119 Safari/537.36}')
+			chrome_opt.add_argument(f'user-agent={'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/72.0.3626.119 Chrome/72.0.3626.119 Safari/537.36'}')
 			driver = webdriver.Chrome(chrome_options=chrome_opt,executable_path='/usr/pythoncode/cheser/chromedriver') #注意需要将chromedriver放入代码中方可运行
 			URL = 'https://billing.virmach.com/clientarea.php?action=services'
 			driver.get(URL)
