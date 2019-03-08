@@ -29,7 +29,7 @@ header = {
 
 #代理，可用可不用，方便burpsuite抓包分析的
 proxies = {
-    'http': 'http://119.57.105.73:53281'
+    'http': 'https://112.85.149.105:9999'
 }
 
 #获取token的函数
@@ -90,6 +90,13 @@ def getlogin(file):
 		print('Can\'t find the file')
 
 if __name__ == '__main__':
+			# res = requests.session()
+			# page = res.get("http://www.ip111.cn/", headers=header, proxies = proxies)
+			# print(page.text)
+
+	    #取得页面
+
+	    # print(page)
 
 	logininfo = getlogin('loginfile')
 	uname = logininfo[0]
