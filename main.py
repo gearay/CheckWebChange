@@ -98,9 +98,10 @@ if __name__ == '__main__':
 	while True:
 		now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
 		if now == scheduled_time and flag==0:
-			itchat.auto_login(hotReload=True, enableCmdQR=2)
+			# itchat.auto_login(hotReload=True, enableCmdQR=2)
 			sersta = chkvps(uname,pword)
-			itchat.send_msg('%s Virmach server now is on %s'%(now, sersta),)
+			# itchat.send_msg('%s Virmach server now is on %s'%(now, sersta),)
+			print('%s Virmach server now is on %s'%(now, sersta))
 			flag=1
 		else:
 			if flag==1:
