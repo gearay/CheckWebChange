@@ -5,6 +5,7 @@ import requests #做web请求的库
 from bs4 import BeautifulSoup #处理html的库
 import itchat
 import datetime
+from selenium import webdriver
 # import argparse
 #import threading #多线程库
 # import sys
@@ -33,6 +34,7 @@ proxies = {
     'http': 'https://112.231.80.198:8123'
 }
 
+cookies = {'__cfduid=d7df4a06a70ca5fd874d5fac86c9b93ba1549957398; _ga=GA1.2.1857082821.1549957407; _fbp=fb.1.1549957410223.109094711; __mmapiwsid=ba0690f9-331d-406c-b737-1971aaccf757:6e09e41b3e3b63cb0ad25571b298811009b1fe92; __stripe_mid=fcf1b080-08b9-4585-9d5b-5c1d9fdf4eee; WHMCSeXMvUTd4giP5=tnmbdnqg1uk9hvdg7epacofa54; _gid=GA1.2.1519600148.1552028986; _gat=1; crisp-client%2Fsession%2Fb7400af9-fa17-4b41-9910-dbdc0f3ad1f7=session_19a49e3c-960b-40f4-b61a-34f2d421394d'}
 #获取token的函数
 def gettoken(page):
     #将传进来的html页面传给BeautifulSoup
@@ -91,9 +93,12 @@ def getlogin(file):
 		print('Can\'t find the file')
 
 if __name__ == '__main__':
-			res = requests.session()
-			page = res.get("https://billing.virmach.com")
-			print(page.text)
+			driver = webdriver.Chrome(chromdriver) #注意需要将chromedriver放入代码中方可运行
+			URL = 'https://billing.virmach.com/clientarea.php?action=services'
+			driver.get(URL)
+			time.sleep(7) # 要大于5s
+			html=driver.page_source # 获取实际页面的html
+			print(html)
 
 	    #取得页面
 
