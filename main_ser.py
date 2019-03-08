@@ -34,12 +34,12 @@ if __name__ == '__main__':
 	# now = datetime.datetime.now()+datetime.timedelta(days=1)
 	gamelist = cherocket(now.strftime("%Y-%m"))
 	flag=0
-	scheduled_time = now.strftime("%Y-%m-%d %H:%M")
+	scheduled_time = '2019-03-09 07:00'
 	while True:
 		if now.strftime("%Y-%m-%d %H:%M") == scheduled_time and flag==0:
 			itchat.auto_login(hotReload=True, enableCmdQR=2)
 			gflag = 0
-			nowd = (now+datetime.timedelta(days=1)).strftime("%Y-%m-%d")		
+			nowd = now.strftime("%Y-%m-%d")		
 			for game in gamelist:
 				
 				if game['startTime'][:10] == nowd:
