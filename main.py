@@ -98,12 +98,12 @@ if __name__ == '__main__':
 			chrome_opt = webdriver.ChromeOptions()
 			chrome_opt.add_argument('--headless')
 			chrome_opt.add_argument('--disable-gpu')
-			chrome_opt.add_argument('--sandbox')
+			chrome_opt.add_argument('--no-sandbox')
 			chrome_opt.add_argument('--disable-dev-shm-usage')
 			driver = webdriver.Chrome(chrome_options=chrome_opt,executable_path='/usr/pythoncode/cheser/chromedriver') #注意需要将chromedriver放入代码中方可运行
 			URL = 'https://billing.virmach.com/clientarea.php?action=services'
 			driver.get(URL)
-			time.sleep(7) # 要大于5s
+			time.sleep(10) # 要大于5s
 			html=driver.page_source # 获取实际页面的html
 			print(html)
 
