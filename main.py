@@ -93,7 +93,7 @@ def getlogin(file):
 		print('Can\'t find the file')
 
 if __name__ == '__main__':
-			driver = webdriver.Chrome(chromdriver) #注意需要将chromedriver放入代码中方可运行
+			driver = webdriver.Chrome('/usr/pythoncode/cheser/chromdriver') #注意需要将chromedriver放入代码中方可运行
 			URL = 'https://billing.virmach.com/clientarea.php?action=services'
 			driver.get(URL)
 			time.sleep(7) # 要大于5s
