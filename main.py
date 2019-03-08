@@ -29,7 +29,7 @@ header = {
 
 #代理，可用可不用，方便burpsuite抓包分析的
 proxies = {
-    'http': 'http://59.44.247.194:9797'
+    'http': 'https://112.231.80.198:8123'
 }
 
 #获取token的函数
