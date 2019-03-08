@@ -4,6 +4,7 @@ import requests
 import re
 import json
 import datetime
+import itchat
 
 header = {
 		'authority': 'billing.virmach.com',
@@ -29,13 +30,28 @@ def cherocket(date):
 
 
 if __name__ == '__main__':
-	nowm = datetime.datetime.now().strftime("%Y-%m")
-	gamelist = cherocket(nowm)
-	for game in gamelist:
-		stardate = game['startTime'][:10]
-		nowd = datetime.datetime.now().strftime("%Y-%m-%d")
-		print(stardate+nowd)
-		# if stardate == nowd.text:
-		# 	print('今日有比赛')
-		# else:
-		# 	print('今日无比赛')
+	now = datetime.datetime.now()
+	# now = datetime.datetime.now()+datetime.timedelta(days=1)
+	gamelist = cherocket(now.strftime("%Y-%m"))
+	flag=0
+	scheduled_time = now.strftime("%Y-%m-%d %H:%M")
+	while True:
+		if now.strftime("%Y-%m-%d %H:%M") == scheduled_time and flag==0:
+			itchat.auto_login(hotReload=True, enableCmdQR=2)
+			gflag = 0
+			nowd = (now+datetime.timedelta(days=1)).strftime("%Y-%m-%d")		
+			for game in gamelist:
+				
+				if game['startTime'][:10] == nowd:
+					itchat.send_msg('今日有比赛，%s %s 对 %s' % (game['startTime'][-8:],game['leftName'],game['rightName']))
+					gflag = 1
+
+			if gflag == 0:
+				itchat.send_msg('今日无火箭比赛')
+			flag = 1
+		else:
+			if flag==1:
+				scheduled_time=(now+datetime.timedelta(days=1)).strftime("%Y-%m-%d %H:%M")
+				flag=0
+
+
