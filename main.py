@@ -26,10 +26,11 @@ header = {
     'Connection': 'keep-alive',
 }
 
+
 #代理，可用可不用，方便burpsuite抓包分析的
-#proxies = {
-#    'http': 'http://127.0.0.1:8080'
-#}
+proxies = {
+    'http': 'http://222.139.245.130:58424'
+}
 
 #获取token的函数
 def gettoken(page):
@@ -52,7 +53,7 @@ def login(username, password,loginurl,formurl):
     #token机制是基于session的，session是基于cookies的，所以一定要开启requests的session功能
     res = requests.session()
     #取得页面
-    page = res.get(formurl, headers=header)
+    page = res.get(formurl, headers=header, proxies = proxies)
     #获取token
     token = gettoken(page.text)
     #构造post的数据
