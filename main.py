@@ -7,6 +7,7 @@ import itchat
 import datetime
 from selenium import webdriver
 from pyvirtualdisplay import Display
+import time
 # import argparse
 #import threading #多线程库
 # import sys
