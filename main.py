@@ -92,7 +92,7 @@ def getlogin(file):
 
 if __name__ == '__main__':
 			res = requests.session()
-			page = res.get("https://billing.virmach.com", headers=header, proxies = proxies)
+			page = res.get("https://billing.virmach.com")
 			print(page.text)
 
 	    #取得页面
