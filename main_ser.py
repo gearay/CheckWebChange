@@ -23,8 +23,17 @@ def cherocket(date):
 	page = se.get('https://mat1.gtimg.com/apps/hpage2/nbateammatchlist_10.json', headers =header)
 	page = re.findall(re.compile(r'[(](.*)[)]', re.S),page.text) 
 	jsonp = json.loads(page[0])
-	games = jsonp[date]
-	return(games)
+	gamelist = jsonp[date.strftime("%Y-%m")]
+	gflag = 0
+	nowd = date.strftime("%Y-%m-%d")
+	for game in gamelist:
+		
+		if game['startTime'][:10] == nowd:
+			return('今日有比赛，%s %s 对 %s' % (game['startTime'][-8:],game['leftName'],game['rightName']))
+			gflag = 1
+
+	if gflag == 0:
+		return('今日无火箭比赛')
 
 
 
@@ -32,22 +41,14 @@ def cherocket(date):
 if __name__ == '__main__':
 	now = datetime.datetime.now()
 	# now = datetime.datetime.now()+datetime.timedelta(days=1)
-	gamelist = cherocket(now.strftime("%Y-%m"))
+	
 	flag=0
 	scheduled_time = '2019-03-09 07:00'
+	# scheduled_time = now.strftime("%Y-%m-%d %H:%M")
 	while True:
 		if now.strftime("%Y-%m-%d %H:%M") == scheduled_time and flag==0:
 			itchat.auto_login(hotReload=True, enableCmdQR=2)
-			gflag = 0
-			nowd = now.strftime("%Y-%m-%d")		
-			for game in gamelist:
-				
-				if game['startTime'][:10] == nowd:
-					itchat.send_msg('今日有比赛，%s %s 对 %s' % (game['startTime'][-8:],game['leftName'],game['rightName']))
-					gflag = 1
-
-			if gflag == 0:
-				itchat.send_msg('今日无火箭比赛')
+			itchat.send_msg(cherocket(now))
 			flag = 1
 		else:
 			if flag==1:
