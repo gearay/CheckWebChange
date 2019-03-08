@@ -106,6 +106,7 @@ if __name__ == '__main__':
 			time.sleep(10) # 要大于5s
 			html=driver.page_source # 获取实际页面的html
 			print(html)
+			driver.quit()
 
 	    #取得页面
 
