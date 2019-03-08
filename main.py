@@ -29,7 +29,7 @@ header = {
 
 #代理，可用可不用，方便burpsuite抓包分析的
 proxies = {
-    'http': 'https://112.85.149.105:9999'
+    'http': 'http://59.44.247.194:9797'
 }
 
 #获取token的函数
@@ -90,31 +90,31 @@ def getlogin(file):
 		print('Can\'t find the file')
 
 if __name__ == '__main__':
-			# res = requests.session()
-			# page = res.get("http://www.ip111.cn/", headers=header, proxies = proxies)
-			# print(page.text)
+			res = requests.session()
+			page = res.get("http://www.ip111.cn/", headers=header, proxies = proxies)
+			print(page.text)
 
 	    #取得页面
 
 	    # print(page)
 
-	logininfo = getlogin('loginfile')
-	uname = logininfo[0]
-	pword = logininfo[1]
-	scheduled_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-	flag=0
-	while True:
-		now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-		if now == scheduled_time and flag==0:
-			# itchat.auto_login(hotReload=True, enableCmdQR=2)
-			sersta = chkvps(uname,pword)
-			# itchat.send_msg('%s Virmach server now is on %s'%(now, sersta),)
-			print('%s Virmach server now is on %s'%(now, sersta))
-			flag=1
-		else:
-			if flag==1:
-				scheduled_time=(datetime.datetime.now()+datetime.timedelta(hours=3)).strftime("%Y-%m-%d %H:%M")
-				flag=0
+	# logininfo = getlogin('loginfile')
+	# uname = logininfo[0]
+	# pword = logininfo[1]
+	# scheduled_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+	# flag=0
+	# while True:
+	# 	now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+	# 	if now == scheduled_time and flag==0:
+	# 		# itchat.auto_login(hotReload=True, enableCmdQR=2)
+	# 		sersta = chkvps(uname,pword)
+	# 		# itchat.send_msg('%s Virmach server now is on %s'%(now, sersta),)
+	# 		print('%s Virmach server now is on %s'%(now, sersta))
+	# 		flag=1
+	# 	else:
+	# 		if flag==1:
+	# 			scheduled_time=(datetime.datetime.now()+datetime.timedelta(hours=3)).strftime("%Y-%m-%d %H:%M")
+	# 			flag=0
 
 #获取密码字典的文件对象
 # def getdict(file):
