@@ -94,8 +94,9 @@ def getlogin(file):
 		print('Can\'t find the file')
 
 if __name__ == '__main__':
-			display = Display(visible=0, size=(800,600))
-			display.start()
+			chrome_opt = webdriver.ChromeOptions()
+			chrome_opt.add_argument('--headless')
+			chrome_opt.add_argument('--disable-gpu')
 			driver = webdriver.Chrome('/usr/pythoncode/cheser/chromedriver') #注意需要将chromedriver放入代码中方可运行
 			URL = 'https://billing.virmach.com/clientarea.php?action=services'
 			driver.get(URL)
