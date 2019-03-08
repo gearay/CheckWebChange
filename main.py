@@ -21,7 +21,8 @@ header = {
 		'accept-language': 'zh-CN,zh;q=0.9,zh-TW;q=0.8,en-US;q=0.7,en;q=0.',
 		'cache-control':'max-age=0',
 		'upgrade-insecure-requests': '1',
-    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/72.0.3626.119 Chrome/72.0.3626.119 Safari/537.36',
+    # 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/72.0.3626.119 Chrome/72.0.3626.119 Safari/537.36',
+    'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3',
     'scheme': 'https',
     'Connection': 'keep-alive',
 }
