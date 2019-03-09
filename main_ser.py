@@ -43,8 +43,8 @@ if __name__ == '__main__':
 	# now = datetime.datetime.now()+datetime.timedelta(days=1)
 	
 	flag=0
-	scheduled_time = '2019-03-10 07:00'
-	# scheduled_time = now.strftime("%Y-%m-%d %H:%M")
+	# scheduled_time = '2019-03-10 07:00'
+	scheduled_time = now.strftime("%Y-%m-%d %H:%M")
 	while True:
 		if now.strftime("%Y-%m-%d %H:%M") == scheduled_time and flag==0:
 			itchat.auto_login(hotReload=True, enableCmdQR=2)
