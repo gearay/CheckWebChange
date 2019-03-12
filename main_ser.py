@@ -46,7 +46,7 @@ if __name__ == '__main__':
 	scheduled_time = '2019-03-12 14:42'
 	# scheduled_time = now.strftime("%Y-%m-%d %H:%M")
 	while True:
-		if now.strftime("%Y-%m-%d %H:%M") == scheduled_time and flag==0:
+		if now.strftime("%Y-%m-%d %H:%M") >= scheduled_time and flag==0:
 			itchat.auto_login(hotReload=True, enableCmdQR=2)
 			itchat.send_msg(cherocket(now))
 			flag = 1
