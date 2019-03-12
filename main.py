@@ -95,42 +95,42 @@ def getlogin(file):
 		print('Can\'t find the file')
 
 if __name__ == '__main__':
-			user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/72.0.3626.119 Chrome/72.0.3626.119 Safari/537.36'
-			chrome_opt = webdriver.ChromeOptions()
-			chrome_opt.add_argument('--headless')
-			chrome_opt.add_argument('--disable-gpu')
-			chrome_opt.add_argument('--no-sandbox')
-			chrome_opt.add_argument('--disable-dev-shm-usage')
-			chrome_opt.add_argument('user-agent={user_agent}')
-			driver = webdriver.Chrome(chrome_options=chrome_opt,executable_path='/usr/pythoncode/cheser/chromedriver') #注意需要将chromedriver放入代码中方可运行
-			URL = 'https://billing.virmach.com/clientarea.php?action=services'
-			driver.get(URL)
-			time.sleep(10) # 要大于5s
-			html=driver.page_source # 获取实际页面的html
-			print(html)
-			driver.quit()
+			# user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/72.0.3626.119 Chrome/72.0.3626.119 Safari/537.36'
+			# chrome_opt = webdriver.ChromeOptions()
+			# chrome_opt.add_argument('--headless')
+			# chrome_opt.add_argument('--disable-gpu')
+			# chrome_opt.add_argument('--no-sandbox')
+			# chrome_opt.add_argument('--disable-dev-shm-usage')
+			# chrome_opt.add_argument('user-agent={user_agent}')
+			# driver = webdriver.Chrome(chrome_options=chrome_opt,executable_path='/usr/pythoncode/cheser/chromedriver') #注意需要将chromedriver放入代码中方可运行
+			# URL = 'https://billing.virmach.com/clientarea.php?action=services'
+			# driver.get(URL)
+			# time.sleep(10) # 要大于5s
+			# html=driver.page_source # 获取实际页面的html
+			# print(html)
+			# driver.quit()
 
 	    #取得页面
 
 	    # print(page)
 
-	# logininfo = getlogin('loginfile')
-	# uname = logininfo[0]
-	# pword = logininfo[1]
-	# scheduled_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-	# flag=0
-	# while True:
-	# 	now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-	# 	if now == scheduled_time and flag==0:
-	# 		# itchat.auto_login(hotReload=True, enableCmdQR=2)
-	# 		sersta = chkvps(uname,pword)
-	# 		# itchat.send_msg('%s Virmach server now is on %s'%(now, sersta),)
-	# 		print('%s Virmach server now is on %s'%(now, sersta))
-	# 		flag=1
-	# 	else:
-	# 		if flag==1:
-	# 			scheduled_time=(datetime.datetime.now()+datetime.timedelta(hours=3)).strftime("%Y-%m-%d %H:%M")
-	# 			flag=0
+	logininfo = getlogin('loginfile')
+	uname = logininfo[0]
+	pword = logininfo[1]
+	scheduled_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+	flag=0
+	while True:
+		now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+		if now == scheduled_time and flag==0:
+			# itchat.auto_login(hotReload=True, enableCmdQR=2)
+			sersta = chkvps(uname,pword)
+			# itchat.send_msg('%s Virmach server now is on %s'%(now, sersta),)
+			print('%s Virmach server now is on %s'%(now, sersta))
+			flag=1
+		else:
+			if flag==1:
+				scheduled_time=(datetime.datetime.now()+datetime.timedelta(hours=3)).strftime("%Y-%m-%d %H:%M")
+				flag=0
 
 #获取密码字典的文件对象
 # def getdict(file):
