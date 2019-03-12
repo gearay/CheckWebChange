@@ -53,7 +53,7 @@ if __name__ == '__main__':
 			flag = 1
 		else:
 			if flag==1:
-				scheduled_time=(now+datetime.timedelta(days=1)).strftime("%Y-%m-%d %H:%M")
+				scheduled_time=(datetime.datetime.strptime(scheduled_time, "%Y-%m-%d %H:%M")+datetime.timedelta(days=1)).strftime("%Y-%m-%d %H:%M")
 				print(scheduled_time)
 				flag=0
 
