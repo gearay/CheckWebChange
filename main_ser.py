@@ -5,6 +5,7 @@ import re
 import json
 import datetime
 import itchat
+import time
 
 header = {
 		'authority': 'billing.virmach.com',
@@ -46,7 +47,7 @@ if __name__ == '__main__':
 	scheduled_time = '2019-03-12 5:00'
 	# scheduled_time = now.strftime("%Y-%m-%d %H:%M")
 	while True:
-		if now.strftime("%Y-%m-%d %H:%M") >= scheduled_time and flag==0:
+		if now >= time.strptime(scheduled_time, "%Y-%m-%d %H:%M") and flag==0:
 			itchat.auto_login(hotReload=True, enableCmdQR=2)
 			itchat.send_msg(cherocket(now))
 			flag = 1
