@@ -40,16 +40,16 @@ def cherocket(date):
 
 
 if __name__ == '__main__':
-	now = datetime.datetime.now()
+	# now = datetime.datetime.now()
 	# now = datetime.datetime.now()+datetime.timedelta(days=1)
 	
 	flag=0
-	scheduled_time = '2019-03-12 5:00'
+	scheduled_time = '2019-03-13 5:00'
 	# scheduled_time = now.strftime("%Y-%m-%d %H:%M")
 	while True:
-		if now >= datetime.datetime.strptime(scheduled_time, "%Y-%m-%d %H:%M") and flag==0:
+		if datetime.datetime.now() >= datetime.datetime.strptime(scheduled_time, "%Y-%m-%d %H:%M") and flag==0:
 			itchat.auto_login(hotReload=True, enableCmdQR=2)
-			itchat.send_msg(cherocket(now))
+			itchat.send_msg(cherocket(datetime.datetime.now())
 			flag = 1
 		else:
 			if flag==1:
