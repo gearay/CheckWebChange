@@ -49,7 +49,7 @@ if __name__ == '__main__':
 	while True:
 		if datetime.datetime.now() >= datetime.datetime.strptime(scheduled_time, "%Y-%m-%d %H:%M") and flag==0:
 			itchat.auto_login(hotReload=True, enableCmdQR=2)
-			itchat.send_msg(cherocket(datetime.datetime.now())
+			itchat.send_msg(cherocket(datetime.datetime.now()))
 			flag = 1
 		else:
 			if flag==1:
