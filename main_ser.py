@@ -44,7 +44,7 @@ if __name__ == '__main__':
 	# now = datetime.datetime.now()+datetime.timedelta(days=1)
 	
 	flag=0
-	scheduled_time = '2019-03-13 5:00'
+	scheduled_time = '2019-04-02 5:00'
 	# scheduled_time = now.strftime("%Y-%m-%d %H:%M")
 	while True:
 		if datetime.datetime.now() >= datetime.datetime.strptime(scheduled_time, "%Y-%m-%d %H:%M") and flag==0:
