@@ -19,6 +19,10 @@ header = {
     'Connection': 'keep-alive',
 }
 
+proxies = {
+    'http': 'https://112.231.80.198:8123'
+}
+
 def cherocket():
 	se = requests.session()
 	page = se.get('https://mat1.gtimg.com/apps/hpage2/nbateammatchlist_10.json', headers =header)
@@ -42,7 +46,7 @@ def getrtm(uname, pword):
 	urlpath = "https://www.rememberthemilk.com/json/"+uname
 	authurl = "https://www.rememberthemilk.com/auth.rtm"
 	res = requests.session()
-	authpage = res.post(authurl, data= rtmpost, headers = header)
+	authpage = res.post(authurl, data= rtmpost, headers = header, proxies = proxies)
 	contentpage = res.get(urlpath)
 	return(contentpage.text)
 
@@ -90,7 +94,6 @@ if __name__ == '__main__':
 				loginfo = getlogin('loginfile')
 				un =  [x[1]  for x in loginfo if x[0] == 'rtm'][0]
 				pa =  [x[2]  for x in loginfo if x[0] == 'rtm'][0]
-				print(un+pa)
 				pagertm = getrtm(un,pa)
 				msgrtm = getrtmTask(pagertm)
 			except Exception as e:
