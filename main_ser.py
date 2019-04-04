@@ -94,8 +94,7 @@ if __name__ == '__main__':
 				loginfo = getlogin('loginfile')
 				un =  [x[1]  for x in loginfo if x[0] == 'rtm'][0]
 				pa =  [x[2]  for x in loginfo if x[0] == 'rtm'][0]
-				print(pa+un)
-				pagertm = getrtm(un,pa)
+				pagertm = getrtm("gearay","f16ak47")
 				msgrtm = getrtmTask(pagertm)
 			except Exception as e:
 				msgrtm = "rtm任务查询有误"
