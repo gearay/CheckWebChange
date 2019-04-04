@@ -8,12 +8,15 @@ import itchat
 
 
 header = {
-        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,\
+        image/webp,image/apng,*/*;q=0.8',
         'accept-encoding': 'gzip, deflate, br',
         'accept-language': 'zh-CN,zh;q=0.9,zh-TW;q=0.8,en-US;q=0.7,en;q=0.',
         'cache-control': 'max-age=0',
         'upgrade-insecure-requests': '1',
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) \
+        AppleWebKit/537.36 (KHTML, like Gecko) \
+        Chrome/72.0.3626.119 Safari/537.36',
         'scheme': 'https',
         'Connection': 'keep-alive',
 }
@@ -25,7 +28,8 @@ proxies = {
 
 def cherocket():
     se = requests.session()
-    page = se.get('https://mat1.gtimg.com/apps/hpage2/nbateammatchlist_10.json', headers=header)
+    page = se.get('https://mat1.gtimg.com/apps/hpage2/nbatea\
+        mmatchlist_10.json', headers=header)
     page = re.findall(re.compile(r'[(](.*)[)]', re.S), page.text)
     jsonp = json.loads(page[0])
     gamelist = jsonp[datetime.datetime.now().strftime("%Y-%m")]
@@ -33,7 +37,9 @@ def cherocket():
     nowd = datetime.datetime.now().strftime("%Y-%m-%d")
     for game in gamelist:
         if game['startTime'][:10] == nowd:
-            return('今日有比赛，%s %s 对 %s' % (game['startTime'][-8:],game['leftName'], game['rightName']))
+            return('今日有比赛，%s %s 对 %s' % (game['startTime\
+                '][-8:], game['leftN\
+                ame'], game['rightName']))
             gflag = 1
 
     if gflag == 0:
@@ -53,12 +59,15 @@ def getrtm(uname, pword):
 # 取出当日日程
 def getrtmTask(jsonp):
     # tasks = json.loads(jsonp)
-    curt = (datetime.datetime.strptime(datetime.datetime.now().strftime("%Y-%m-%d"), ("%Y-%m-%d"))).timestamp()
+    curt = (datetime.datetime.strptime(datetime.datetime.now().strftime("%Y-%\
+        m-%d"), ("%Y-%m-%d"))).timestamp()
     jsoncts = (json.loads(jsonp))['tasks']
     taskContl = []
     for task in jsoncts:
-        if task['date_due_has_time'] and task['date_due'] > (curt)*1000 and task['date_due'] <(curt+86400)*1000:
-            taskContl.append((datetime.datetime.fromtimestamp(task['date_due']/1000)).strftime("%H:%M") + task['name'])
+        if task['date_due_has_time'] and task['date_due'] > (curt)*1000 and task['date\
+        _due'] < (curt+86400)*1000:
+            taskContl.append((datetime.datetime.fromtimestamp(task['date_due\
+                ']/1000)).strftime("%H:%M") + task['name'])
     if len(taskContl):
         return(" ".join(taskContl))
     else:
@@ -82,7 +91,8 @@ if __name__ == '__main__':
     scheduled_time = '2019-04-04 5:00'
     # scheduled_time = now.strftime("%Y-%m-%d %H:%M")
     while True:
-        if datetime.datetime.now() >= datetime.datetime.strptime(scheduled_time, "%Y-%m-%d %H:%M") and flag == 0:
+        if datetime.datetime.now() >= datetime.datetime.strptime(scheduled_time, "\
+        %Y-%m-%d %H:%M") and flag == 0:
             itchat.auto_login(hotReload=True, enableCmdQR=2)
             # 查看当日火箭比赛信息
             try:
@@ -94,7 +104,7 @@ if __name__ == '__main__':
                 loginfo = getlogin('loginfile')
                 un = [x[1] for x in loginfo if x[0] == 'rtm'][0]
                 pa = [x[2] for x in loginfo if x[0] == 'rtm'][0]
-                pagertm = getrtm(un.strip(),pa.strip())
+                pagertm = getrtm(un.strip(), pa.strip())
                 msgrtm = getrtmTask(pagertm)
             except Exception as e:
                 msgrtm = "rtm任务查询有误"
@@ -103,6 +113,8 @@ if __name__ == '__main__':
             flag = 1
         else:
             if flag == 1:
-                scheduled_time = (datetime.datetime.strptime(scheduled_time, "%Y-%m-%d %H:%M")+datetime.timedelta(days=1)).strftime("%Y-%m-%d %H:%M")
+                scheduled_time = (datetime.datetime.strptime(scheduled_time, "\
+                    %Y-%m-%d %H:%M")+datetime.timedelta(days=1)).strftime("%Y-%m\
+                -%d %H:%M")
                 print(scheduled_time)
                 flag = 0
