@@ -92,11 +92,10 @@ if __name__ == '__main__':
 				pa =  [x[2]  for x in loginfo if x[0] == 'rtm'][0]
 				print(un+pa)
 				pagertm = getrtm(un,pa)
-				# print(pagertm)
 				msgrtm = getrtmTask(pagertm)
 			except Exception as e:
 				msgrtm = "rtm任务查询有误"
-			itchat.send_msg(msgrocket)
+			# itchat.send_msg(msgrocket)
 			itchat.send_msg(msgrtm)
 			flag = 1
 		else:
