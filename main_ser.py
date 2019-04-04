@@ -90,6 +90,7 @@ if __name__ == '__main__':
 				loginfo = getlogin('loginfile')
 				un =  [x[1]  for x in loginfo if x[0] == 'rtm'][0]
 				pa =  [x[2]  for x in loginfo if x[0] == 'rtm'][0]
+				print(un+pa)
 				pagertm = getrtm(un,pa)
 				print(pagertm)
 				msgrtm = getrtmTask(pagertm)
