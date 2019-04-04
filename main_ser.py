@@ -85,20 +85,20 @@ if __name__ == '__main__':
 		if datetime.datetime.now() >= datetime.datetime.strptime(scheduled_time, "%Y-%m-%d %H:%M") and flag==0:
 			itchat.auto_login(hotReload=True, enableCmdQR=2)
 			#查看当日火箭比赛信息
-			# try:
-			# 	msgrocket = cherocket()
-			# except Exception as e:
-			# 	msgrocket = "比赛信息查询有误"
-			#查看当日rtm任务
+			try:
+				msgrocket = cherocket()
+			except Exception as e:
+				msgrocket = "比赛信息查询有误"
+			查看当日rtm任务
 			try:
 				loginfo = getlogin('loginfile')
 				un =  [x[1]  for x in loginfo if x[0] == 'rtm'][0]
 				pa =  [x[2]  for x in loginfo if x[0] == 'rtm'][0]
-				pagertm = getrtm(un.strip(),pa。strip())
+				pagertm = getrtm(un.strip(),pa.strip())
 				msgrtm = getrtmTask(pagertm)
 			except Exception as e:
 				msgrtm = "rtm任务查询有误"
-			# itchat.send_msg(msgrocket)
+			itchat.send_msg(msgrocket)
 			itchat.send_msg(msgrtm)
 			flag = 1
 		else:
