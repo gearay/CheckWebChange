@@ -91,6 +91,7 @@ if __name__ == '__main__':
 				un =  [x[1]  for x in loginfo if x[0] == 'rtm'][0]
 				pa =  [x[2]  for x in loginfo if x[0] == 'rtm'][0]
 				pagertm = getrtm(un,pa)
+				print(pagertm)
 				msgrtm = getrtmTask(pagertm)
 			except Exception as e:
 				msgrtm = "rtm任务查询有误"
