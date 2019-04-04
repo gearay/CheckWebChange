@@ -42,7 +42,7 @@ def getrtm(uname, pword):
 	urlpath = "https://www.rememberthemilk.com/json/"+uname
 	authurl = "https://www.rememberthemilk.com/auth.rtm"
 	res = requests.session()
-	authpage = res.post(authurl, data= rtmpost)
+	authpage = res.post(authurl, data= rtmpost, headers = header)
 	contentpage = res.get(urlpath)
 	return(contentpage.text)
 
