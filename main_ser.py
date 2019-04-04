@@ -91,8 +91,7 @@ if __name__ == '__main__':
     scheduled_time = '2019-04-04 5:00'
     # scheduled_time = now.strftime("%Y-%m-%d %H:%M")
     while True:
-        if datetime.datetime.now() >= datetime.datetime.strptime(scheduled_time, "\
-        %Y-%m-%d %H:%M") and flag == 0:
+        if datetime.datetime.now() >= datetime.datetime.strptime(scheduled_time, "%Y-%m-%d %H:%M") and flag == 0:
             itchat.auto_login(hotReload=True, enableCmdQR=2)
             # 查看当日火箭比赛信息
             try:
