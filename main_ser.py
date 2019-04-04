@@ -89,7 +89,7 @@ if __name__ == '__main__':
 				msgrocket = cherocket()
 			except Exception as e:
 				msgrocket = "比赛信息查询有误"
-			查看当日rtm任务
+			# 查看当日rtm任务
 			try:
 				loginfo = getlogin('loginfile')
 				un =  [x[1]  for x in loginfo if x[0] == 'rtm'][0]
