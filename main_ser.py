@@ -46,7 +46,7 @@ def getrtm(uname, pword):
 	urlpath = "https://www.rememberthemilk.com/json/"+uname
 	authurl = "https://www.rememberthemilk.com/auth.rtm"
 	res = requests.session()
-	authpage = res.post(authurl, data= rtmpost, headers = header, proxies = proxies)
+	authpage = res.post(authurl, data= rtmpost)
 	contentpage = res.get(urlpath)
 	return(contentpage.text)
 
@@ -94,6 +94,7 @@ if __name__ == '__main__':
 				loginfo = getlogin('loginfile')
 				un =  [x[1]  for x in loginfo if x[0] == 'rtm'][0]
 				pa =  [x[2]  for x in loginfo if x[0] == 'rtm'][0]
+				print(un+pa)
 				pagertm = getrtm(un,pa)
 				msgrtm = getrtmTask(pagertm)
 			except Exception as e:
