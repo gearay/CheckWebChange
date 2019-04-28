@@ -80,7 +80,7 @@ def getlogin(file):
 if __name__ == '__main__':
 
     flag = 0
-    scheduled_time = '2019-04-04 5:00'
+    scheduled_time = '2019-04-28 5:00'
     # scheduled_time = now.strftime("%Y-%m-%d %H:%M")
     while True:
         if datetime.datetime.now() >= datetime.datetime.strptime(scheduled_time, "%Y-%m-%d %H:%M") and flag == 0:
